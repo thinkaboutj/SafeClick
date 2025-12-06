@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Lock, Smartphone, CheckCircle, Eye, X, Zap } from 'lucide-react';
+import PasswordBot from './PasswordBot';
 import './App.css';
 
 export default function CyberSecurityLanding() {
   const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showTest, setShowTest] = useState(false);
+  const [showBot, setShowBot] = useState(false);
   const [hackedCount, setHackedCount] = useState(8547);
   const [testResults, setTestResults] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
@@ -109,12 +111,20 @@ export default function CyberSecurityLanding() {
           <div className="font-black text-2xl sm:text-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 bg-clip-text text-transparent">
             🔒 SafeClick
           </div>
-          <button 
-            onClick={() => setShowModal(true)}
-            className="hidden sm:inline-block px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold hover:shadow-lg transition-all hover:scale-105"
-          >
-            ⚡ Protégete YA
-          </button>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setShowBot(true)}
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold hover:shadow-lg transition-all hover:scale-105"
+            >
+              🤖 Chat Contraseñas
+            </button>
+            <button 
+              onClick={() => setShowModal(true)}
+              className="hidden sm:inline-block px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold hover:shadow-lg transition-all hover:scale-105"
+            >
+              ⚡ Protégete YA
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -385,6 +395,20 @@ export default function CyberSecurityLanding() {
           </button>
         </div>
       </section>
+
+      {/* Password Bot Modal */}
+      {showBot && (
+        <PasswordBot onClose={() => setShowBot(false)} />
+      )}
+
+      {/* Floating small chat button */}
+      <button
+        onClick={() => setShowBot(true)}
+        className="fixed right-6 bottom-6 z-40 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-all"
+        title="Abrir Chatbot de Contraseñas"
+      >
+        🤖
+      </button>
 
       {/* Modal */}
       {showModal && (
